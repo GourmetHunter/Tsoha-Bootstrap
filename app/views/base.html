@@ -7,7 +7,7 @@
 
     <title>
       {% block title %}
-        Tietokantasovellus
+        Platfarmer
       {% endblock %}
     </title>
 
@@ -33,14 +33,18 @@
             <span class="icon-bar"></span>
           </button>
           <!-- Sovelluksen nimi -->
-          <a class="navbar-brand" href="{{base_path}}">Tsoha Bootstrap</a>
+          <a class="navbar-brand" href="{{base_path}}">Platfarmer</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Etusivu</a></li>
+            <li><a href="{{base_path}}">Home</a></li>
+            <li><a href="{{base_path}}/games">Game List</a>
           </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{base_path}}/login">Login</a></li>
+            </ul>
         </div>
       </div>
     </nav>
