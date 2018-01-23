@@ -7,9 +7,9 @@
       View::make('home.html');
     }
 
-    public static function sandbox(){
+    public static function account(){
       // Testaa koodiasi täällä
-      View::make('suggestion.html');
+      View::make('account.html');
     }
     
     public static function gamelist(){
@@ -18,6 +18,26 @@
     
     public static function login(){
         View::make('login.html');
+    }
+    
+    public static function showgame(){
+        View::make('game_show.html');
+    }
+    
+    public static function editgame(){
+        View::make('game_edit.html');
+    }
+    
+    public static function addgame(){
+        View::make('game_add.html');
+    }
+    
+    public static function suggestgame(){
+        View::make('game_suggest.html');
+    }
+    
+    public static function suggestions(){
+        View::make('suggestions.html');
     }
     
   }

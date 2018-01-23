@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-group">
+    <form>
+        <h1>Suggest a Game</h1>
+        <label>Title</label>
+        <input class="form-control" type="text">
+        <ul>
+            <li><label>Publisher </label><input class="form-control" type="text"></li>
+        </ul>
+        <h2>Summary</h2>
+        <textarea class="form-control" rows="5"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+{% endblock %}

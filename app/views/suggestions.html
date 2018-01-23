@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Listed Games</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Publisher</th>
+            <th>Suggestions</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- Listataan pelit tähän -->
+        <tr>
+            <td>Shovel Knight</td>
+            <td>Yacht Club Games</td>
+            <td>7</td>
+            <td><a class="btn btn-default btn-sm" style="float: right" href="#">Add</a></td>
+        </tr>
+        <tr>
+            <td>Hovel Night</td>
+            <td>Yast Club Games</td>
+            <td>1</td>
+            <td><a class="btn btn-default btn-sm" style="float: right" href="#">Add</a></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
