@@ -1,0 +1,4 @@
+{
+  "cmd": ["bash", "/home/local/okarki/tsoha/Tsoha-Bootstrap/deploy.sh"],
+  "selector" : "source.shell"
+}
