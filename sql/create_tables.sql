@@ -6,9 +6,9 @@ hallinto boolean NOT NULL
 );
 
 CREATE TABLE Peliehdotus(
-
 id SERIAL PRIMARY KEY,
-nimi varchar(180) NOT NULL
+nimi varchar(180) NOT NULL,
+julkaisija varchar(180) NOT NULL
 );
 
 CREATE TABLE Peliehdotus_Kayttaja(
