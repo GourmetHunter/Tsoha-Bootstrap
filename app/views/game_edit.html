@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
+{% if admin_logged_in %}
+    <a class="btn btn-danger" style="float: right" href="{{base_path}}/removegame/{{game.id}}">Remove</a>
+{% endif %}
 <div class="form-group">
-    <form>
-        <h1>Edit - Hollow Knight</h1>
+    <form method="post" action="{{base_path}}/editgame">
+        <h1>Edit</h1>
+        <h2>{{game.name}}</h2>
         <label>Title</label>
-        <input class="form-control" type="text">
+        <input class="form-control" name="name" type="text" value="{{game.name}}"/>
         <ul>
-            <li><label>Release Date </label><input class="form-control" type="date"></li>
-            <li><label>Publisher </label><input class="form-control" type="text"></li>
+            <li><label>Release Date </label><input class="form-control" name="date" type="date" value="{{game.publishingdate}}"/></li>
+            <li><label>Publisher </label><input class="form-control" name="publisher" type="text" value="{{game.publisher}}" /></li>
         </ul>
-        <h2>Summary</h2>
-        <textarea class="form-control" rows="5"></textarea>
+        <h3>Summary</h3>
+        <textarea class="form-control" rows="5" name="summary">{{game.description}}</textarea>
         <br>
+        <input type="hidden" name="id" value="{{game.id}}" />
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>

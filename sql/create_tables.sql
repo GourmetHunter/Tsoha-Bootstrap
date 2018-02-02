@@ -12,6 +12,7 @@ julkaisija varchar(180) NOT NULL
 );
 
 CREATE TABLE Peliehdotus_Kayttaja(
+id SERIAL PRIMARY KEY,
 kayttaja_id INTEGER REFERENCES Kayttaja(id),
 peliehdotus_id INTEGER REFERENCES Peliehdotus(id),
 paivays DATE NOT NULL
@@ -26,6 +27,7 @@ julkaisupaiva DATE NOT NULL
 );
 
 CREATE TABLE Arvostelu(
+id SERIAL PRIMARY KEY,
 kayttaja_id INTEGER REFERENCES Kayttaja(id),
 peli_id INTEGER REFERENCES Peli(id),
 pisteet INTEGER NOT NULL,

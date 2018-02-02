@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="form-group">
-    <form>
+    <form method="post" action="{{base_path}}/suggest">
         <h1>Suggest a Game</h1>
         <label>Title</label>
-        <input class="form-control" type="text">
-        <label>Publisher </label><input class="form-control" type="text">
+        <input class="form-control" name="title" type="text">
+        <label>Publisher </label>
+        <input class="form-control" name="publisher" type="text">
         <br>
         <button type="submit" class="btn btn-primary">Suggest</button>
     </form>

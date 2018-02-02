@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h1>Login</h1>
 
-<!-- Kaikki lomakkeen elementit form-tagin sisään -->
-<form>
-    <!-- Tekstikenttä käyttäjätunnukselle -->
+{% if failure %}
+<div style="color: red">The username or password was invalid!</div><br>
+{% endif %}
+
+<form method="post" action="{{base_path}}/profile">
+    
     <div class="form-group">
         <label>Username</label>
-        <input class="form-control" type="text">
+        <input name="username" class="form-control" type="text">
     </div>
 
-    <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
         <label>Password</label>
-        <input class="form-control" type="password">
+        <input name="password" class="form-control" type="password">
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>

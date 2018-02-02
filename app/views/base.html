@@ -1,68 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>
-      {% block title %}
-        Platfarmer
-      {% endblock %}
-    </title>
+        <title>
+            {% block title %}
+            Platfarmer
+            {% endblock %}
+        </title>
 
-    {% block head %}
-      <!-- Bootstrap (tyylitiedosto) -->
-      <link href="{{base_path}}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        {% block head %}
+        <!-- Bootstrap (tyylitiedosto) -->
+        <link href="{{base_path}}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-      <!-- Oma tyylitiedostomme -->
-      <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
-    {% endblock %}
-  </head>
+        <!-- Oma tyylitiedostomme -->
+        <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
+        {% endblock %}
+    </head>
 
-  <body>
+    <body>
 
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- Sovelluksen nimi -->
-          <a class="navbar-brand" href="{{base_path}}">Platfarmer</a>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Sovelluksen nimi -->
+                    <a class="navbar-brand" href="{{base_path}}">Platfarmer</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="nav navbar-nav">
+                        <!-- Navigaation linkit -->
+                        <li><a href="{{base_path}}">Home</a></li>
+                        <li><a href="{{base_path}}/games">Game List</a></li>
+                        <li><a href="{{base_path}}/suggestions">Suggested Games</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user_logged_in == false %}
+                        <li><a href="{{base_path}}/login">Login</a></li>
+                        {% else %}
+                        <li>
+                            <a href="{{base_path}}/profile">Profile</a>
+                        </li>
+                        <li>
+                            <a style="float: right" href="{{base_path}}/logout">Logout</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="main-container">
+            <!-- Dynaaminen sisältö tulee tähän -->
+            {% block content %}{% endblock %}
         </div>
 
-        <div class="collapse navbar-collapse" id="navigation">
-          <ul class="nav navbar-nav">
-            <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Home</a></li>
-            <li><a href="{{base_path}}/games">Game List</a>
-          </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{base_path}}/login">Login</a></li>
-            </ul>
-        </div>
-      </div>
-    </nav>
+        {% block body %}
+        <!-- jQuery -->
+        <script src="{{base_path}}/assets/js/jquery.min.js"></script>
 
-    <div id="main-container">
-      <!-- Dynaaminen sisältö tulee tähän -->
-      {% block content %}{% endblock %}
-    </div>
+        <!-- Bootstrap (skriptitiedosto) -->
+        <script src="{{base_path}}/assets/bootstrap/js/bootstrap.min.js"></script>
 
-    {% block body %}
-      <!-- jQuery -->
-      <script src="{{base_path}}/assets/js/jquery.min.js"></script>
-
-      <!-- Bootstrap (skriptitiedosto) -->
-      <script src="{{base_path}}/assets/bootstrap/js/bootstrap.min.js"></script>
-
-      <!-- Oma skriptitiedostomme -->
-      <script src="{{base_path}}/assets/js/site.js"></script>
-    {% endblock %}
-  </body>
+        <!-- Oma skriptitiedostomme -->
+        <script src="{{base_path}}/assets/js/site.js"></script>
+        {% endblock %}
+    </body>
 </html>

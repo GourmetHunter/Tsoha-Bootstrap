@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Profile</h1>
 
-<div><strong>Name: </strong>OllimusPrime</div>
+<div><strong>Name: </strong>{{account.name}}</div>
 
 <h2>Active Suggestions</h2>
 
@@ -17,14 +17,20 @@
     </thead>
 
     <tbody>
-        <!-- Listataan pelit tähän -->
+        {% for suggestion in suggestions %}
         <tr>
-            <td><div>Showel Knight</div></td>
-            <td>Yacht Club Games</td>
-            <td>23.12.2017</td>
-            <td>22.1.2018</td>
-            <th><a class="btn btn-default btn-sm" href="#">Remove</a></th>
+            <td>{{suggestion.name}}</td>
+            <td>{{suggestion.publisher}}</td>
+            <td>{{suggestion.date}}</td>
+            <th>
+                <form method="post" action="{{base_path}}/removesuggestion">
+                    <input type="hidden" name="accountid" value="{{account.id}}" />
+                    <input type="hidden" name="suggestionid" value="{{suggestion.id}}" />
+                    <button type="submit" class="btn btn-default btn-sm">Remove</button>
+                </form>
+            </th>
         </tr>
     </tbody>
+    {% endfor %}
 </table>
 {% endblock %}
