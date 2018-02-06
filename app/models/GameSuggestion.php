@@ -172,7 +172,6 @@ class GameSuggestion extends BaseModel {
             $suggestion = new GameSuggestion(array(
                 'id' => $row['id'],
                 'name' => $row['nimi'],
-                'date' => $row['paivays'],
                 'publisher' => $row['julkaisija']
             ));
         }
