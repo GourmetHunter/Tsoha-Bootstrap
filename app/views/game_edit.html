@@ -6,6 +6,9 @@
 <div class="form-group">
     <form method="post" action="{{base_path}}/editgame">
         <h1>Edit</h1>
+        {% if error %}
+            <p style="color: red">{{error}}</p>
+        {% endif %}
         <h2>{{game.name}}</h2>
         <label>Title</label>
         <input class="form-control" name="name" type="text" value="{{game.name}}"/>

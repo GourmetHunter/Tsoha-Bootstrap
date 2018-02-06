@@ -9,6 +9,20 @@ class Game extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
+    
+    public static function validate($date, $description, $name, $publisher){
+        if($date == null){
+            return 'You must set date!';
+        }
+        $reviewError = Review::validate($description);
+        if(strlen($reviewError) > 0){
+            return $reviewError;
+        }
+        $suggestionError = GameSuggestion::validate($name, $publisher);
+        if(strlen($suggestionError) > 0){
+            return $suggestionError;
+        }
+    }
 
     public static function all() {
 

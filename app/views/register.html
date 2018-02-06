@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Register</h1>
+
+{% if error %}
+<div style="color: red">{{error}}</div><br>
+{% endif %}
+
+<form method="post" action="{{base_path}}/registeruser">
+    
+    <div class="form-group">
+        <label>Username</label>
+        <input name="username" class="form-control" type="text" value="{{username}}">
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input name="password1" class="form-control" type="text" value="{{p1}}">
+    </div>
+
+    <div class="form-group">
+        <label>Password Again</label>
+        <input name="password2" class="form-control" type="text">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

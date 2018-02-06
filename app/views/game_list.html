@@ -7,6 +7,9 @@
 <a class="btn btn-primary" style="float: right" href="{{base_path}}/addgame">Add Game</a>
 {% endif %}
 <h1>Listed Games</h1>
+{% if error %}
+    <p style="color: red">{{error}}</p>
+{% endif %}
 <table class="table table-striped table-bordered">
     <thead>
         <tr>

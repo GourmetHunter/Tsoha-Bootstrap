@@ -20,12 +20,24 @@ $routes->post('/suggest', function() {
    SuggestionController::suggest(); 
 });
 
+$routes->post('/registeruser', function() {
+    BasicController::register(); 
+});
+
+$routes->get('/register', function() {
+    BasicController::getregister(); 
+});
+
 $routes->get('/profile', function() {
    BasicController::getAccount(); 
 });
 
 $routes->get('/logout', function() {
     BasicController::logout(); 
+});
+
+$routes->get('/removesuggestion/:id', function($id) {
+    SuggestionController::adminRemoveSuggestion($id);
 });
 
 $routes->post('/removesuggestion', function() {

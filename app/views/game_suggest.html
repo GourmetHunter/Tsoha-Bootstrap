@@ -3,6 +3,9 @@
 <div class="form-group">
     <form method="post" action="{{base_path}}/suggest">
         <h1>Suggest a Game</h1>
+        {% if error %}
+            <p style="color: red">{{error}}</p>
+        {% endif %}
         <label>Title</label>
         <input class="form-control" name="title" type="text">
         <label>Publisher </label>

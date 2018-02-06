@@ -25,5 +25,9 @@
 
       return $errors;
     }
+    
+    public static function isInteger($id){
+        return is_int($id);
+    }
 
   }

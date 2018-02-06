@@ -20,6 +20,9 @@
 <br>
 
 <h2>Review</h2>
+{% if error %}
+    <p style="color: red">{{error}}</p>
+{% endif %}
 <form method="post" action="{{base_path}}/review">
     <label>Score</label>
     <select class="form-control" name="score">
@@ -35,7 +38,7 @@
         <option>10</option>
     </select>
     <label>Summary</label>
-    <textarea class="form-control" rows="5" name="content"></textarea>
+    <textarea class="form-control" rows="5" name="content">{{previous}}</textarea>
     <input type="hidden" name="id" value="{{game.id}}" />
     <br>
     <button type="submit" class="btn btn-info">Post Review</button>

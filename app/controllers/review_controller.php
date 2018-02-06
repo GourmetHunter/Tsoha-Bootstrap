@@ -6,29 +6,43 @@ class ReviewController extends BaseController {
 
     public static function review() {
 
-        $user = BaseController::get_user_logged_in();
-
-        if (!$user) {
-            Redirect::to('/games/' . $id);
-        }
-
         $params = $_POST;
 
         $score = $params['score'];
         $content = $params['content'];
         $id = $params['id'];
+
+        $user = BaseController::get_user_logged_in();
+
+        if (!$user) {
+            Redirect::to('/games/' . $id);
+        }
+        
         $userid = User::find($_SESSION['username'], $_SESSION['password'])->id;
 
-        Review::saveorupdate($id, $userid, $score, $content);
-
-        Redirect::to('/game/' . $id);
+        $error = Review::validate($content);
+        
+        if (count($error) == 0) {
+            
+            Review::saveorupdate($id, $userid, $score, $content);
+            Redirect::to('/game/' . $id);
+            
+        } else {
+            
+            Redirect::to('/game/' . $id, array('error' => $error, 'previous' => $content));
+            
+        }
     }
 
     public static function deleteReview($gameid, $reviewid) {
 
+        if(!ctype_digit(strval($gameid)) && !ctype_digit(strval($reviewid))){
+            Redirect::to('/', array('error' => "There was error in the URL! You've been redirected to the frontpage."));
+        }
+
         $admin = BaseController::get_admin_logged_in();
 
-        if($admin) {
+        if ($admin) {
             Review::delete($reviewid);
         }
 

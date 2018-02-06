@@ -10,6 +10,20 @@ class Review extends BaseModel{
         parent::__construct($attributes);
     }
 
+    public static function validate($content){
+        
+        if(strlen($content) < 18){
+            return 'The content must be be atleast 18 characters long!';
+        }
+        
+        $nospaceContent = str_replace(' ', '', $content);
+        
+        if(strlen($nospaceContent) == 0){
+            return 'The content must have more than just spaces!';
+        }
+        
+    }
+    
     public static function findByGame($id) {
         
         //kysely

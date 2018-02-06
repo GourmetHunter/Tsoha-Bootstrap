@@ -4,10 +4,40 @@
 
 class GameSuggestion extends BaseModel {
 
-    public $id, $name, $publisher, $suggested;
+    public $id, $name, $publisher, $suggested, $date;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+    }
+    
+    public static function validate($name, $publisher){
+        
+        if($name == NULL || strlen($name) == 0){
+            return "Name can't be null!";
+        }
+        
+        $nospaceName = str_replace(' ', '', $name);
+        
+        if(strlen($nospaceName) == 0){
+            return 'Name has to contain characters, other than just space!';
+        }
+        
+        if($publisher == NULL || strlen($publisher) == 0){
+            return "Publisher name can't be null!";
+        }
+        
+        $nospaceName = str_replace(' ', '', $publisher);
+        
+        if(strlen($nospaceName) == 0){
+            return 'Publisher name has to contain characters, other than just space!';
+        }
+        
+    }
+    
+    public static function validateRemove($id){
+        if(GameSuggestion::find($id) == null){
+            return "The suggestion you were looking for couldn't be found";
+        }
     }
 
     public static function suggest($title, $publisher, $userid) {
@@ -106,7 +136,7 @@ class GameSuggestion extends BaseModel {
         $query = DB::connection()->prepare('SELECT Peliehdotus.id AS id, '
                 . 'Peliehdotus.nimi AS name, '
                 . 'Peliehdotus.julkaisija AS publisher, '
-                . 'Peliehdotus_kayttaja.paivays AS date '
+                . 'Peliehdotus_kayttaja.paivays AS paivays '
                 . 'FROM Peliehdotus LEFT JOIN Peliehdotus_kayttaja '
                 . 'ON Peliehdotus.id = Peliehdotus_kayttaja.peliehdotus_id '
                 . 'WHERE Peliehdotus_kayttaja.kayttaja_id = :identifier '
@@ -122,7 +152,7 @@ class GameSuggestion extends BaseModel {
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'publisher' => $row['publisher'],
-                'date' => $row['date'],
+                'date' => $row['paivays'],
             ));
         }
 
@@ -142,6 +172,7 @@ class GameSuggestion extends BaseModel {
             $suggestion = new GameSuggestion(array(
                 'id' => $row['id'],
                 'name' => $row['nimi'],
+                'date' => $row['paivays'],
                 'publisher' => $row['julkaisija']
             ));
         }

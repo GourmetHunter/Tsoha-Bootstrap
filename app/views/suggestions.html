@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user_logged_in and admin_logged_in == false %} 
-<a class="btn btn-primary" style="float: right" href="{{base_path}}/suggest">Suggest</a>
+<a class="btn btn-primary" style="float: right" href="{{base_path}}/suggest">Make Suggestion</a>
 {% endif %}
 {% if admin_logged_in %}
 <a class="btn btn-primary" style="float: right" href="{{base_path}}/addgame">Add Game</a>
@@ -15,6 +15,9 @@
             <th>Count</th>
             {% if admin_logged_in %}
                 <th>Add</th>
+                <th>Remove</th>
+            {% elseif user_logged_in %}
+                <th></th>
             {% endif %}
         </tr>
     </thead>
@@ -27,6 +30,15 @@
             <td>{{suggestion.suggested}}</td>
             {% if admin_logged_in %}
                 <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/addgame/{{suggestion.id}}">Add</a></td>
+                <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/removesuggestion/{{suggestion.id}}">Remove</a></td>
+            {% elseif user_logged_in %}
+                <td>
+                    <form method="post" action="{{base_path}}/suggest">
+                        <input name="title" type="hidden" value="{{suggestion.name}}">
+                        <input name="publisher" type="hidden" value="{{suggestion.publisher}}">
+                        <button type="submit" class="btn btn-primary">Suggest</button>
+                    </form>
+                </td>
             {% endif %}
         </tr>
         {% endfor %}

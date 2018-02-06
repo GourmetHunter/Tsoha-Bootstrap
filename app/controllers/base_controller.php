@@ -73,4 +73,35 @@ class BasicController extends BaseController {
         View::make('login.html', array('failure' => false));
     }
 
+    public static function register() {
+        
+        $params = $_POST;
+
+        $username = $params['username'];
+        $password1 = $params['password1'];
+        $password2 = $params['password2'];
+        
+        $error = User::validate($username, $password1, $password2);
+        
+        if(count($error) == 0){
+
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password1;
+            
+            User::createUser($username, $password1);
+            
+            Redirect::to('/profile' );
+            
+        } else {
+            
+            Redirect::to('/register', array('error' => $error, 'username' => $username, 'p1' => $password1));
+            
+        }
+        
+    }
+    
+    public static function getregister(){
+        View::make('register.html');
+    }
+    
 }
