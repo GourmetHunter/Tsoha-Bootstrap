@@ -6,6 +6,7 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://okarki.users.cs.helsinki.fi/tsoha/)
 
 * [Linkki sovellukseni kirjautumiseen](http://okarki.users.cs.helsinki.fi/tsoha/login)
+* [Linkki sovellukseni rekisteröitymiseen](http://okarki.users.cs.helsinki.fi/tsoha/login)
 * [Peli lista](http://okarki.users.cs.helsinki.fi/tsoha/games)
 * [Pelin Ehdotus](http://okarki.users.cs.helsinki.fi/tsoha/suggest)
 * [Peliehdotus Lista](http://okarki.users.cs.helsinki.fi/tsoha/suggestions)
@@ -17,6 +18,12 @@ Vaatii sisäänkirjautumisen
 Vaatii adminsitraatio käyttäjän
 * [Pelin editointi](http://okarki.users.cs.helsinki.fi/tsoha/editgame)
 * [Pelin Lisäys](http://okarki.users.cs.helsinki.fi/tsoha/addgame)
+
+Admin Käyttäjän username: OllimusPrime
+Admin Käyttäjän salasana: 123
+
+Normaali Käyttäjän username: Ollimus
+Normaali Käyttäjän salasana: 321
 
 
 ## Työn aihe
