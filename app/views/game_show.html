@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% if admin_logged_in %}
-    <a class="btn btn-primary" style="float: right" href="{{base_path}}/editgame/{{game.id}}">Edit</a>
+<a class="btn btn-primary" style="float: right" href="{{base_path}}/editgame/{{game.id}}">Edit</a>
 {% endif %}
 <h1>{{game.name}}</h1>
 <!-- Tiedot tulee listana tähän -->
@@ -21,7 +21,7 @@
 
 <h2>Review</h2>
 {% if error %}
-    <p style="color: red">{{error}}</p>
+<p style="color: red">{{error}}</p>
 {% endif %}
 <form method="post" action="{{base_path}}/review">
     <label>Score</label>
@@ -37,7 +37,8 @@
         <option>9</option>
         <option>10</option>
     </select>
-    <label>Summary</label>
+    <label>Content</label>
+    <div style="font-style: italic">Length of the summary must be at least 18 characters.</div>
     <textarea class="form-control" rows="5" name="content">{{previous}}</textarea>
     <input type="hidden" name="id" value="{{game.id}}" />
     <br>
@@ -67,7 +68,7 @@
             <td>{{review.score}}</td>
             <td>{{review.content}}</td>
             {% if admin_logged_in %}
-                <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/removereview/{{review.id}}/{{game.id}}">Remove</a></td>
+            <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/removereview/{{review.id}}/{{game.id}}">Remove</a></td>
             {% endif %}
         </tr>
         {% endfor %}

@@ -8,18 +8,17 @@
 {% endif %}
 
 <form method="post" action="{{base_path}}/registeruser">
-    
+
     <div class="form-group">
+        <div style="font-style: italic">The username must be at least 4 characters long.</div>
         <label>Username</label>
         <input name="username" class="form-control" type="text" value="{{username}}">
     </div>
 
     <div class="form-group">
+        <div style="font-style: italic">The password must be at least 5 characters long.</div>
         <label>Password</label>
         <input name="password1" class="form-control" type="text" value="{{p1}}">
-    </div>
-
-    <div class="form-group">
         <label>Password Again</label>
         <input name="password2" class="form-control" type="text">
     </div>
