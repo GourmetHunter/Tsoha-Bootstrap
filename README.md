@@ -7,7 +7,7 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseni kirjautumiseen](http://okarki.users.cs.helsinki.fi/tsoha/login)
 * [Linkki sovellukseni rekisteröitymiseen](http://okarki.users.cs.helsinki.fi/tsoha/login)
-* [Peli lista](http://okarki.users.cs.helsinki.fi/tsoha/games)
+* [Peli lista](http://okarki.users.cs.helsinki.fi/tsoha/games/1/name)
 * [Pelin Ehdotus](http://okarki.users.cs.helsinki.fi/tsoha/suggest)
 * [Peliehdotus Lista](http://okarki.users.cs.helsinki.fi/tsoha/suggestions)
 * [Pelin Sivu](http://okarki.users.cs.helsinki.fi/tsoha/showgame)
