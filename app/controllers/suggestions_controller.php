@@ -11,11 +11,7 @@ class SuggestionController extends BaseController {
 
     public static function remove() {
 
-        $logged = BaseController::get_user_logged_in();
-
-        if (!$logged) {
-            Redirect::to('/login');
-        }
+        self::check_logged_in();
 
         $params = $_POST;
 
@@ -30,23 +26,13 @@ class SuggestionController extends BaseController {
     }
 
     public static function suggestgame() {
-
-        $logged = BaseController::get_user_logged_in();
-
-        if (!$logged) {
-            Redirect::to('/login');
-        }
-
+        self::check_logged_in();
         View::make('game_suggest.html');
     }
 
     public static function suggest() {
-
-        $logged = BaseController::get_user_logged_in();
-
-        if (!$logged) {
-            Redirect::to('/login');
-        }
+        
+        self::check_logged_in();
 
         $params = $_POST;
 
@@ -69,8 +55,10 @@ class SuggestionController extends BaseController {
         if (!$admin) {
             Redirect::to('/');
         }
+        
+        $categories = Category::all();
 
-        View::make('game_add.html', array('suggestion' => null));
+        View::make('game_add.html', array('suggestion' => null, 'categories' => $categories));
     }
 
     public static function moveToGame($id) {
@@ -90,8 +78,10 @@ class SuggestionController extends BaseController {
         if ($suggestion == null) {
             Redirect::to('/addgame');
         }
+        
+        $categories = Category::all();
 
-        View::make('game_add.html', array('suggestion' => $suggestion));
+        View::make('game_add.html', array('suggestion' => $suggestion, 'categories' => $categories));
     }
 
     public static function listGame() {
@@ -108,12 +98,13 @@ class SuggestionController extends BaseController {
         $description = $params['summary'];
         $date = $params['date'];
         $publisher = $params['publisher'];
+        $category = Category::getId($params['category'])->id;
 
         $error = Game::validate($date, $description, $name, $publisher);
 
         if (count($error) == 0) {
-            Game::save($name, $description, $publisher, $date);
-            Redirect::to('/games');
+            Game::save($name, $description, $publisher, $date, $category);
+            Redirect::to('/games/1/name');
         } else {
             $suggestion = new GameSuggestion(array(
                 'name' => $name,

@@ -28,7 +28,7 @@ class BasicController extends BaseController {
             $suggestions = GameSuggestion::findByUser($id);
             Redirect::to('/profile', array('account' => $account, 'suggestions' => $suggestions));
         } else {
-            Redirect::to('/login', array('failure' => true));
+            Redirect::to('/login', array('message' => 'The username or password was invalid!'));
         }
     }
 
@@ -41,11 +41,7 @@ class BasicController extends BaseController {
 
     public static function getAccount() {
 
-        $user = BaseController::get_user_logged_in();
-
-        if (!$user) {
-            Redirect::to('/');
-        }
+        self::check_logged_in();
 
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];
@@ -65,12 +61,12 @@ class BasicController extends BaseController {
             $suggestions = GameSuggestion::findByUser($id);
             View::make('account.html', array('account' => $account, 'suggestions' => $suggestions));
         } else {
-            View::make('login.html', array('failure' => true));
+            View::make('login.html');
         }
     }
 
     public static function login() {
-        View::make('login.html', array('failure' => false));
+        View::make('login.html');
     }
 
     public static function register() {

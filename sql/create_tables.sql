@@ -18,12 +18,18 @@ peliehdotus_id INTEGER REFERENCES Peliehdotus(id),
 paivays DATE NOT NULL
 );
 
+CREATE TABLE Kategoria(
+id SERIAL PRIMARY KEY,
+nimi varchar(50) NOT NULL UNIQUE
+);
+
 CREATE TABLE Peli(
 id SERIAL PRIMARY KEY,
 nimi varchar(180) NOT NULL,
 kuvaus TEXT NOT NULL,
 julkaisija varchar(180) NOT NULL,
-julkaisupaiva DATE NOT NULL
+julkaisupaiva DATE NOT NULL,
+kategoria_id INTEGER REFERENCES Kategoria(id)
 );
 
 CREATE TABLE Arvostelu(

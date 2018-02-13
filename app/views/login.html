@@ -3,8 +3,8 @@
 
 <h1>Login</h1>
 
-{% if failure %}
-<div style="color: red">The username or password was invalid!</div><br>
+{% if message %}
+<div style="color: red">{{message}}</div><br>
 {% endif %}
 
 <form method="post" action="{{base_path}}/profile">

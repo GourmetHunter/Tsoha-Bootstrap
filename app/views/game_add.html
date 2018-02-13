@@ -12,6 +12,12 @@
             <li><label>Release Date </label><input class="form-control" name="date" type="date"></li>
             <li><label>Publisher </label><input class="form-control" type="text" name="publisher" value="{{suggestion.publisher}}"></li>
         </ul>
+        <label>Category</label>
+        <select name="category">
+            {% for category in categories %}
+                <option>{{category.name}}</option>
+            {% endfor %}
+        </select>
         <h2>Summary</h2>
         <div style="font-style: italic">Length of the summary must be at least 18 characters.</div>
         <textarea class="form-control" name="summary" rows="5">{{previous}}</textarea>

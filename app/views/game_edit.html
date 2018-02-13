@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 {% if admin_logged_in %}
-<a class="btn btn-danger" style="float: right" href="{{base_path}}/removegame/{{game.id}}">Remove</a>
+<form method="get" action="{{base_path}}/removegame/{{game.id}}" class="destroy-form" data-confirm="Are you sure?">
+    <button type="submit" class="btn btn-danger" style="float: right">Remove</button>
+</form>
 {% endif %}
 <div class="form-group">
     <form method="post" action="{{base_path}}/editgame">
@@ -16,6 +18,13 @@
             <li><label>Release Date </label><input class="form-control" name="date" type="date" value="{{game.publishingdate}}"/></li>
             <li><label>Publisher </label><input class="form-control" name="publisher" type="text" value="{{game.publisher}}" /></li>
         </ul>
+        <label>Category</label>
+        <select name="category">
+            <option>{{game.category}}</option>
+            {% for category in categories %}
+                <option>{{category.name}}</option>
+            {% endfor %}
+        </select>
         <h3>Summary</h3>
         <div style="font-style: italic">Length of the summary must be at least 18 characters.</div>
         <textarea class="form-control" rows="5" name="summary">{{game.description}}</textarea>
@@ -26,3 +35,4 @@
     </form>
 </div>
 {% endblock %}
+

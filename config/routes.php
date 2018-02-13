@@ -4,8 +4,12 @@ $routes->get('/', function() {
     BasicController::index();
 });
 
-$routes->get('/games', function() {
-    GameController::gamelist();
+$routes->get('/games/:page/:rule', function($page, $rule) {
+    GameController::gamelist($page, $rule);
+});
+
+$routes->post('/search', function() {
+    GameController::search();
 });
 
 $routes->get('/login', function() {

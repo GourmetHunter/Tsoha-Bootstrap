@@ -12,11 +12,7 @@ class ReviewController extends BaseController {
         $content = $params['content'];
         $id = $params['id'];
 
-        $user = BaseController::get_user_logged_in();
-
-        if (!$user) {
-            Redirect::to('/games/' . $id);
-        }
+        self::check_logged_in();
         
         $userid = User::find($_SESSION['username'], $_SESSION['password'])->id;
 

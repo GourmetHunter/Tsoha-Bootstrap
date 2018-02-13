@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user_logged_in and admin_logged_in == false %} 
-<a class="btn btn-primary" style="float: right" href="{{base_path}}/suggest">Suggest</a>
-{% endif %}
+<form method="post" action="{{base_path}}/search">
+    <label>Search</label>
+    <div class="input-group" style="margin-bottom: 12px">
+        <input class="form-control" name="search" type="text"value="{{search}}"/>
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </span>
+    </div>
+</form>
 {% if admin_logged_in %}
 <a class="btn btn-primary" style="float: right" href="{{base_path}}/addgame">Add Game</a>
 {% endif %}
@@ -10,12 +16,17 @@
 {% if error %}
     <p style="color: red">{{error}}</p>
 {% endif %}
+<label>Sort: </label>
+<a style="margin-right: 6px; margin-left: 3px" href="{{base_path}}/games/1/name">Name</a>
+<a style="margin-right: 6px; margin-left: 3px" href="{{base_path}}/games/1/date">Date</a>
+<a style="margin-right: 6px; margin-left: 3px" href="{{base_path}}/games/1/category">Category</a>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>Name</th>
             <th>Publisher</th>
             <th>Release Date</th>
+            <th>Category</th>
         </tr>
     </thead>
 
@@ -25,9 +36,19 @@
             <td><a href="{{base_path}}/game/{{game.id}}">{{game.name}}</a></td>
             <td>{{game.publisher}}</td>
             <td>{{game.publishingdate}}</td>
+            <td>{{game.category}}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
+{% if showpage %}
+<nav>
+    <label>Page </label><br>
+    <ul class="pagination">
+    {% for page in 1..pages %}
+    <li class="{% if curr_page == page %}active{% endif %}"><a href="{{base_path}}/games/{{page}}/{{rule}}">{{page}}</a></li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endif %}
 {% endblock %}
