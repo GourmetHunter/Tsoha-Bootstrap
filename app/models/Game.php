@@ -77,10 +77,10 @@ class Game extends BaseModel {
         }
         
         $limit = self::$pagesize;
-        $offset = ($page-1) * $limit;
-        if($offset < 0){
-            $offset == 0;
+        if($page < 1){
+            $page = 1;
         }
+        $offset = ($page-1) * $limit;
         
         //kysely
         $query = DB::connection()->prepare('SELECT Peli.id as id, Peli.nimi as nimi, Peli.kuvaus as kuvaus, Peli.julkaisija as julkaisija, Peli.julkaisupaiva as julkaisupaiva, Kategoria.nimi as kategoria '

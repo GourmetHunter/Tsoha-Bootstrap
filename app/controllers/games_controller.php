@@ -5,6 +5,11 @@
 class GameController extends BaseController {
 
     public static function gamelist($page, $rule) {
+
+        if(!ctype_digit(strval($page))){
+            Redirect::to('/', array('error' => "There was error in the URL! You've been redirected to the frontpage."));
+        }
+        
         $games = Game::all($rule, $page);
         $pages = Game::pages();
         $showpage = true;
