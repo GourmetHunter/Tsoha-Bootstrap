@@ -9,13 +9,18 @@
         <label>Title</label>
         <input class="form-control" name="title" type="text" value="{{suggestion.name}}">
         <ul>
-            <li><label>Release Date </label><input class="form-control" name="date" type="date"></li>
+            <li><label>Release Date </label><input class="form-control" name="date" type="date" value="{{date}}"></li>
             <li><label>Publisher </label><input class="form-control" type="text" name="publisher" value="{{suggestion.publisher}}"></li>
         </ul>
         <label>Category</label>
         <select name="category">
-            {% for category in categories %}
-                <option>{{category.name}}</option>
+            {% if category %}
+            <option>{{category}}</option>
+            {% endif %}
+            {% for cat in categories %}
+                {% if cat.name != category %}
+                <option>{{cat.name}}</option>
+                {% endif %}
             {% endfor %}
         </select>
         <h2>Summary</h2>

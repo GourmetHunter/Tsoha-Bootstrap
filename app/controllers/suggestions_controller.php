@@ -31,7 +31,7 @@ class SuggestionController extends BaseController {
     }
 
     public static function suggest() {
-        
+
         self::check_logged_in();
 
         $params = $_POST;
@@ -44,7 +44,7 @@ class SuggestionController extends BaseController {
             GameSuggestion::suggest($title, $publisher, $account_id);
             Redirect::to('/suggestions');
         } else {
-            Redirect::to('/suggest', array('error' => $error));
+            Redirect::to('/suggest', array('error' => $error, 'title' => $title, 'publisher' => $publisher));
         }
     }
 
@@ -55,7 +55,7 @@ class SuggestionController extends BaseController {
         if (!$admin) {
             Redirect::to('/');
         }
-        
+
         $categories = Category::all();
 
         View::make('game_add.html', array('suggestion' => null, 'categories' => $categories));
@@ -78,7 +78,7 @@ class SuggestionController extends BaseController {
         if ($suggestion == null) {
             Redirect::to('/addgame');
         }
-        
+
         $categories = Category::all();
 
         View::make('game_add.html', array('suggestion' => $suggestion, 'categories' => $categories));
@@ -89,7 +89,7 @@ class SuggestionController extends BaseController {
         $admin = BaseController::get_admin_logged_in();
 
         if (!$admin) {
-            Redirect::to('/');
+            Redirect::to('/', array('error' => 'You are not an admin!'));
         }
 
         $params = $_POST;
@@ -103,14 +103,19 @@ class SuggestionController extends BaseController {
         $error = Game::validate($date, $description, $name, $publisher);
 
         if (count($error) == 0) {
-            Game::save($name, $description, $publisher, $date, $category);
-            Redirect::to('/games/1/name');
+            $where = Game::save($name, $description, $publisher, $date, $category);
+            if ($where == 0) {
+                Redirect::to('/games/1/name');
+            } else {
+                Redirect::to('/games/1/name', array('error' => 'That game already exists!'));
+            }
         } else {
             $suggestion = new GameSuggestion(array(
                 'name' => $name,
                 'publisher' => $publisher
             ));
-            View::make('game_add.html', array('suggestion' => $suggestion, 'previous' => $description, 'error' => $error));
+            $categories = Category::all();
+            View::make('game_add.html', array('suggestion' => $suggestion, 'date' => $date, 'previous' => $description, 'error' => $error, 'category' => $params['category'], 'categories' => $categories));
         }
     }
 

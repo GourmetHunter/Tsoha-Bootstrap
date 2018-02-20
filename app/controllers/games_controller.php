@@ -95,7 +95,8 @@ class GameController extends BaseController {
             Game::update($name, $date, $publisher, $summary, $id, $category);
             Redirect::to('/game/' . $id);
         } else {
-            Redirect::to('/editgame/' . $id, array('error' => $error));
+            $game = array('name' => $name, 'publishingdate' => $date, 'publisher' => $publisher, 'category' => $params['category'], 'id' => $id, 'description' => $summary);
+            Redirect::to('/editgame/' . $id, array('error' => $error, 'game' => $game));
         }
     }
 

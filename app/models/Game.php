@@ -119,6 +119,12 @@ class Game extends BaseModel {
             
             GameSuggestion::removeByString($name, $publisher);
             
+            return 0;
+            
+        } else {
+            
+            return 1;
+            
         }
         
     }
