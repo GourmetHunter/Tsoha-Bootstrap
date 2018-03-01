@@ -4,7 +4,7 @@
 
 class Review extends BaseModel{
     
-    public $id, $user, $score, $content, $date;
+    public $id, $user, $score, $content, $date, $userid;
     
     public function __construct($attributes){
         parent::__construct($attributes);
@@ -27,7 +27,7 @@ class Review extends BaseModel{
     public static function findByGame($id) {
         
         //kysely
-        $query = DB::connection()->prepare('SELECT * FROM Arvostelu LEFT JOIN Kayttaja ON Arvostelu.kayttaja_id = kayttaja.id WHERE Arvostelu.peli_id = :id');
+        $query = DB::connection()->prepare('SELECT Arvostelu.id as id, Kayttaja.nimi as nimi, Arvostelu.pisteet as pisteet, Arvostelu.sisältö as sisältö, Arvostelu.paivays as paivays, Kayttaja.id as userid FROM Arvostelu LEFT JOIN Kayttaja ON Arvostelu.kayttaja_id = kayttaja.id WHERE Arvostelu.peli_id = :id');
 
         $query->execute(array('id' => $id));
 
@@ -40,7 +40,8 @@ class Review extends BaseModel{
                 'user' => $row['nimi'],
                 'score' => $row['pisteet'],
                 'content' => $row['sisältö'],
-                'date' => $row['paivays']
+                'date' => $row['paivays'],
+                'userid' => $row['userid']
             ));
         }
 
@@ -62,6 +63,13 @@ class Review extends BaseModel{
         
         $query = DB::connection()->prepare('DELETE FROM Arvostelu WHERE id = :id');
         $query->execute(array('id' => $id));
+        
+    }
+    
+    public static function deleteFromUser($id, $userid) {
+        
+        $query = DB::connection()->prepare('DELETE FROM Arvostelu WHERE id = :id AND kayttaja_id = :userid');
+        $query->execute(array('id' => $id, 'userid' => $userid));
         
     }
     

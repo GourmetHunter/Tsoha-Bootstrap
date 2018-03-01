@@ -25,7 +25,7 @@ class ReviewController extends BaseController {
             
         } else {
             
-            Redirect::to('/game/' . $id, array('error' => $error, 'previous' => $content));
+            Redirect::to('/game/' . $id, array('error' => $error, 'previous' => $content, 'rScore' => $score));
             
         }
     }
@@ -40,9 +40,16 @@ class ReviewController extends BaseController {
 
         if ($admin) {
             Review::delete($reviewid);
+        } else {
+            if(BaseController::get_user_logged_in()){
+                $user = User::find($_SESSION['username'], $_SESSION['password']);
+                Review::deleteFromUser($reviewid, $user->id);
+            }
+            
         }
-
+        
         Redirect::to('/game/' . $gameid);
+
     }
 
 }

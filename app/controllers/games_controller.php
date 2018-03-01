@@ -46,8 +46,20 @@ class GameController extends BaseController {
         
         $reviews = Review::findByGame($id);
         $score = Review::score($id);
+        $score = $score . "";
+        $score = substr($score, 0, 3);
         
-        View::make('game_show.html', array('game' => $game, 'reviews' => $reviews, 'score' => $score));
+        $id = -1;
+        
+        $user = BaseController::get_user_logged_in();
+        
+        if($user){
+            $account = User::find($_SESSION['username'], $_SESSION['password']);
+            $id = $account->id;
+        }
+        
+        View::make('game_show.html', array('game' => $game, 'reviews' => $reviews, 'score' => $score, 'uId' => $id));
+        
     }
 
     public static function editgame($id) {
@@ -71,6 +83,7 @@ class GameController extends BaseController {
         $categories = Category::all();
         
         View::make('game_edit.html', array('game' => $game, 'categories' => $categories));
+        
     }
 
     public static function saveedit() {
@@ -98,6 +111,7 @@ class GameController extends BaseController {
             $game = array('name' => $name, 'publishingdate' => $date, 'publisher' => $publisher, 'category' => $params['category'], 'id' => $id, 'description' => $summary);
             Redirect::to('/editgame/' . $id, array('error' => $error, 'game' => $game));
         }
+        
     }
 
     public static function deletegame($id) {

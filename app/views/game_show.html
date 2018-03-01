@@ -27,16 +27,14 @@
 <form method="post" action="{{base_path}}/review">
     <label>Score</label>
     <select class="form-control" name="score">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
+        {% if rScore %}
+            <option>{{rScore}}</option>
+        {% endif %}
+        {% for a in 1..10 %}
+            {% if a != rScore %}
+                <option>{{a}}</option>
+            {% endif %}
+        {% endfor %}
     </select>
     <label>Content</label>
     <div style="font-style: italic">Length of the summary must be at least 18 characters.</div>
@@ -55,7 +53,7 @@
             <th>Date</th>
             <th>Score</th>
             <th></th>
-            {% if admin_logged_in %}
+            {% if user_logged_in %}
             <th></th>
             {% endif %}
         </tr>
@@ -68,8 +66,8 @@
             <td>{{review.date}}</td>
             <td>{{review.score}}</td>
             <td>{{review.content}}</td>
-            {% if admin_logged_in %}
-            <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/removereview/{{review.id}}/{{game.id}}">Remove</a></td>
+            {% if admin_logged_in or uId == review.userid %}
+                <td><a class="btn btn-default btn-sm" style="float: right" href="{{base_path}}/removereview/{{game.id}}/{{review.id}}">Remove</a></td>
             {% endif %}
         </tr>
         {% endfor %}
